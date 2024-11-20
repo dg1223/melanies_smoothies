@@ -22,24 +22,19 @@ ingredients_list = st.multiselect(
     , max_selections=5
 )
 
-# if ingredients_list:
-#     st.write(ingredients_list)
-#     st.text(ingredients_list)
+if ingredients_list:
+    ingredients_string = ''
 
-#     ingredients_string = ''
+    for chosen_fruit in ingredients_list:
+        ingredients_string += chosen_fruit + ' '
 
-#     for chosen_fruit in ingredients_list:
-#         ingredients_string += chosen_fruit + ' '
-
-#     st.write(ingredients_string)
-
-#     my_insert_statement = """
-#         insert into smoothies.public.ORDERS(ingredients, name_on_order)
-#         values ('""" + ingredients_string + """', '""" + name_on_order + """');
-#     """
+    my_insert_statement = """
+        insert into smoothies.public.ORDERS(ingredients, name_on_order)
+        values ('""" + ingredients_string + """', '""" + name_on_order + """');
+    """
     
-#     time_to_insert = st.button('Submit Order')
+    time_to_insert = st.button('Submit Order')
     
-#     if time_to_insert:
-#         session.sql(my_insert_statement).collect()
-#         st.success(f'Your Smoothie is ordered, {name_on_order}!', icon='✅')
+    if time_to_insert:
+        session.sql(my_insert_statement).collect()
+        st.success(f'Your Smoothie is ordered, {name_on_order}!', icon='✅')
