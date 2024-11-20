@@ -33,7 +33,7 @@ if ingredients_list:
 
     for chosen_fruit in ingredients_list:
         ingredients_string += chosen_fruit + ' '
-        search_on = df.loc[df['FRUIT_NAME'] == chosen_fruit, 'SEARCH_ON']
+        search_on = df.loc[df['FRUIT_NAME'] == chosen_fruit, 'SEARCH_ON'].iloc[0]
         st.write('The search value for ', chosen_fruit,' is ', search_on, '.')
         
         smoothiefroot_response = requests.get('https://my.smoothiefroot.com/api/fruit/' + chosen_fruit)
