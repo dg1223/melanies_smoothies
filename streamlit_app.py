@@ -1,5 +1,5 @@
 import streamlit as st
-from snowflake.snowpark.functions import col
+# from snowflake.snowpark.functions import col
 
 st.title(":cup_with_straw: Customize your smoothie :cup_with_straw:")
 st.write(
@@ -8,38 +8,38 @@ st.write(
     """
 )
 
-name_on_order = st.text_input("Name on Smoothie")
-st.write("The name on your smoothie will be: ", name_on_order)
+# name_on_order = st.text_input("Name on Smoothie")
+# st.write("The name on your smoothie will be: ", name_on_order)
 
-cnx = st.connection('snowflake')
-session = cnx.session()
+# cnx = st.connection('snowflake')
+# session = cnx.session()
 
-my_dataframe = session.table('smoothies.public.FRUIT_OPTIONS').select(col('FRUIT_NAME'))
+# my_dataframe = session.table('smoothies.public.FRUIT_OPTIONS').select(col('FRUIT_NAME'))
 
-ingredients_list = st.multiselect(
-    'Choose up to 5 ingredients: '
-    , my_dataframe
-    , max_selections=5
-)
+# ingredients_list = st.multiselect(
+#     'Choose up to 5 ingredients: '
+#     , my_dataframe
+#     , max_selections=5
+# )
 
-if ingredients_list:
-    st.write(ingredients_list)
-    st.text(ingredients_list)
+# if ingredients_list:
+#     st.write(ingredients_list)
+#     st.text(ingredients_list)
 
-    ingredients_string = ''
+#     ingredients_string = ''
 
-    for chosen_fruit in ingredients_list:
-        ingredients_string += chosen_fruit + ' '
+#     for chosen_fruit in ingredients_list:
+#         ingredients_string += chosen_fruit + ' '
 
-    st.write(ingredients_string)
+#     st.write(ingredients_string)
 
-    my_insert_statement = """
-        insert into smoothies.public.ORDERS(ingredients, name_on_order)
-        values ('""" + ingredients_string + """', '""" + name_on_order + """');
-    """
+#     my_insert_statement = """
+#         insert into smoothies.public.ORDERS(ingredients, name_on_order)
+#         values ('""" + ingredients_string + """', '""" + name_on_order + """');
+#     """
     
-    time_to_insert = st.button('Submit Order')
+#     time_to_insert = st.button('Submit Order')
     
-    if time_to_insert:
-        session.sql(my_insert_statement).collect()
-        st.success(f'Your Smoothie is ordered, {name_on_order}!', icon='✅')
+#     if time_to_insert:
+#         session.sql(my_insert_statement).collect()
+#         st.success(f'Your Smoothie is ordered, {name_on_order}!', icon='✅')
